@@ -9,7 +9,7 @@ function calculate() {
         var exchangeRate = parseFloat(document.getElementById("exchangeRate").value) || 90000;
 
         if (exchangeRate <= 0) {
-            alert("Exchange rate must be a positive number.");
+            alert("سعر الصرف يجب أن يكون قيمة موجبة.");
             return;
         }
 
@@ -26,27 +26,27 @@ function calculate() {
 
         var message = "";
         if (remainingUsd > 0 || remainingLbp > 0) {
-            message = "You have an outstanding amount.";
+            message = " لديك مبلغ مستحق.";
         } else if (remainingUsd < 0 || remainingLbp < 0) {
-            message = "You need to return an amount.";
+            message = " عليك إرجاع مبلغ.";
         }
 
-        var notification = "Remaining USD: " + usdResult + "\n" +
-                           "Remaining LBP: " + lbpResult + "\n" + message;
+        var notification = "المبلغ المتبقي بالدولار: " + usdResult + "\n" +
+                           "المبلغ المتبقي بالليرة اللبنانية: " + lbpResult + "\n" + message;
 
         if (remainingUsd % 1 !== 0 && remainingUsd > 0) {
             var wholeUsd = Math.floor(remainingUsd);
             var fractionalUsd = remainingUsd - wholeUsd;
             var fractionalLbp = fractionalUsd * exchangeRate;
 
-            notification += "\nSettled Amount: " + wholeUsd + " USD and " + fractionalLbp.toLocaleString('ar-LB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " LBP.";
+            notification += "\nالمبلغ المصرف: " + wholeUsd + " دولار و " + fractionalLbp.toLocaleString('ar-LB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " ليرة لبنانية.";
         }
 
         alert(notification);
 
     } catch (error) {
-        console.error("Error:", error);
-        alert("An error occurred during calculations. Please try again.");
+        console.error("حدث خطأ:", error);
+        alert("حدث خطأ أثناء الحسابات. الرجاء المحاولة مرة أخرى.");
     }
 }
 
@@ -58,7 +58,7 @@ function resetCalculator() {
         document.getElementById("lbpPurchase").value = "";
         document.getElementById("exchangeRate").value = "90000";
     } catch (error) {
-        console.error("Error resetting:", error);
-        alert("An error occurred resetting the calculator.");
+        console.error("حدث خطأ في إعادة التعيين:", error);
+        alert("حدث خطأ أثناء إعادة التعيين. الرجاء المحاولة مرة أخرى.");
     }
 }
