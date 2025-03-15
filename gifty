@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>برنامج محاسبة</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .calculator {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+            margin-top: 50px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 48%;
+            padding: 10px;
+            margin: 5px 1%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .reset-btn {
+            background-color: #f44336;
+        }
+
+        .reset-btn:hover {
+            background-color: #e53935;
+        }
+
+        /* Banner Styles */
+        .result-banner {
+            background-color: #4CAF50;
+            color: white;
+            width: 100%;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+            padding: 20px;
+            font-size: 1.5rem;
+            display: none;
+            line-height: 1.8;
+            font-weight: bold;
+        }
+
+        .result-banner span {
+            display: block; /* Ensure each result appears on a new line */
+            margin-bottom: 10px;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 600px) {
+            .calculator {
+                padding: 15px;
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 1.25rem;
+            }
+
+            button {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Result Banner -->
+    <div id="resultBanner" class="result-banner"></div>
+
+    <div class="calculator">
+        <h1>برنامج محاسبة</h1>
+
+        <label for="usdPaid">المبلغ المدفوع بالدولار:</label>
+        <input type="number" id="usdPaid" inputmode="numeric" pattern="[0-9]*">
+
+        <label for="lbpPaid">المبلغ المدفوع بالليرة اللبنانية:</label>
+        <input type="number" id="lbpPaid" inputmode="numeric" pattern="[0-9]*">
+
+        <label for="usdPurchase">قيمة المشتريات بالدولار:</label>
+        <input type="number" id="usdPurchase" inputmode="numeric" pattern="[0-9]*">
+
+        <label for="lbpPurchase">قيمة المشتريات بالليرة اللبنانية:</label>
+        <input type="number" id="lbpPurchase" inputmode="numeric" pattern="[0-9]*">
+
+        <label for="exchangeRate">سعر الصرف (ليرة لبنانية/دولار):</label>
+        <input type="number" id="exchangeRate" value="90000" inputmode="numeric" pattern="[0-9]*">
+
+        <div style="display: flex; justify-content: space-between;">
+            <button onclick="calculate()">احسب</button>
+            <button class="reset-btn" onclick="resetCalculator()">حساب جديد</button>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            try {
+                const usdPaid = parseFloat(document.getElementById("usdPaid").value) || 0;
+                const lbpPaid = parseFloat(document.getElementById("lbpPaid").value) || 0;
+                const usdPurchase = parseFloat(document.getElementById("usdPurchase").value) || 0;
+                const lbpPurchase = parseFloat(document.getElementById("lbpPurchase").value) || 0;
+                const exchangeRate = parseFloat(document.getElementById("exchangeRate").value) || 90000;
+
+                if (exchangeRate <= 0) {
+                    alert("سعر الصرف يجب أن يكون قيمة موجبة.");
+                    return;
+                }
+
+                const totalUsdPaid = usdPaid + (lbpPaid / exchangeRate);
+                const totalLbpPaid = lbpPaid + (usdPaid * exchangeRate);
+                const totalUsdPurchase = usdPurchase + (lbpPurchase / exchangeRate);
+                const totalLbpPurchase = lbpPurchase + (usdPurchase * exchangeRate);
+
+                const remainingUsd = totalUsdPaid - totalUsdPurchase;
+                const remainingLbp = totalLbpPaid - totalLbpPurchase;
+
+                const usdResult = remainingUsd.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                const lbpResult = remainingLbp.toLocaleString('ar-LB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+                let message = "";
+                if (remainingUsd > 0 || remainingLbp > 0) {
+                    message = " لديك مبلغ مستحق.";
+                } else if (remainingUsd < 0 || remainingLbp < 0) {
+                    message = " عليك إرجاع مبلغ.";
+                }
+
+                let notification = `<span>المبلغ المتبقي بالدولار: ${usdResult}</span>
+                                    <span>المبلغ المتبقي بالليرة اللبنانية: ${lbpResult}</span>
+                                    <span>${message}</span>`;
+
+                if (remainingUsd % 1 !== 0 && remainingUsd > 0) {
+                    const wholeUsd = Math.floor(remainingUsd);
+                    const fractionalUsd = remainingUsd - wholeUsd;
+                    const fractionalLbp = fractionalUsd * exchangeRate;
+
+                    notification += `<span>المبلغ المصرف: ${wholeUsd} دولار و ${fractionalLbp.toLocaleString('ar-LB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ليرة لبنانية.</span>`;
+                }
+
+                // Show the result in the banner
+                const resultBanner = document.getElementById("resultBanner");
+                resultBanner.innerHTML = notification;
+                resultBanner.style.display = "block";
+
+                saveDataToSheet(usdPaid, lbpPaid, usdPurchase, lbpPurchase, exchangeRate, remainingUsd, remainingLbp);
+            } catch (error) {
+                console.error("حدث خطأ:", error);
+                alert("حدث خطأ أثناء الحسابات. الرجاء المحاولة مرة أخرى.");
+            }
+        }
+
+        function resetCalculator() {
+            document.getElementById("usdPaid").value = "";
+            document.getElementById("lbpPaid").value = "";
+            document.getElementById("usdPurchase").value = "";
+            document.getElementById("lbpPurchase").value = "";
+
+            // Hide the banner when resetting
+            document.getElementById("resultBanner").style.display = "none";
+        }
+
+        function saveDataToSheet(usdPaid, lbpPaid, usdPurchase, lbpPurchase, exchangeRate, remainingUsd, remainingLbp) {
+            try {
+                const data = {
+                    usdPaid,
+                    lbpPaid,
+                    usdPurchase,
+                    lbpPurchase,
+                    exchangeRate,
+                    remainingUsd,
+                    remainingLbp
+                };
+
+                fetch('YOUR_GOOGLE_APPS_SCRIPT_URL', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    console.log('Data saved:', result);
+                })
+                .catch(error => {
+                    console.error('Error saving data:', error);
+                    alert("حدث خطأ أثناء حفظ البيانات. الرجاء المحاولة مرة أخرى.");
+                });
+            } catch (error) {
+                console.error("حدث خطأ في saveDataToSheet:", error);
+                alert("حدث خطأ في حفظ البيانات. الرجاء المحاولة مرة أخرى.");
+            }
+        }
+    </script>
+</body>
+</html>
