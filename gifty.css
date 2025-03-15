@@ -1,79 +1,84 @@
 /* style.css */
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #4b6cb7, #182848); /* خلفية متدرجة حديثة */
+    font-family: 'Roboto', sans-serif; /* خط حديث */
+    background: linear-gradient(135deg, #2c3e50, #34495e); /* خلفية داكنة */
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    color: #e0e0e0; /* لون نص فاتح */
+    color: #ecf0f1; /* لون نص فاتح */
 }
 
 .calculator {
-    background-color: rgba(255, 255, 255, 0.1); /* خلفية شفافة */
-    padding: 40px;
-    border-radius: 20px; /* حواف مستديرة أكثر */
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); /* ظل أعمق */
-    width: 400px; /* عرض أوسع */
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 50px; /* زيادة الحشو */
+    border-radius: 25px; /* حواف أكثر استدارة */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    width: 450px; /* عرض أكبر */
     max-width: 95%;
     box-sizing: border-box;
     transition: transform 0.3s ease;
-    backdrop-filter: blur(10px); /* تأثير ضبابي للخلفية */
+    backdrop-filter: blur(15px); /* تأثير ضبابي أقوى */
 }
 
 .calculator:hover {
-    transform: translateY(-8px); /* رفع عند التمرير */
+    transform: translateY(-10px);
 }
 
 .calculator h1 {
     text-align: center;
-    margin-bottom: 35px;
-    color: #a8dadc; /* لون عنوان مميز */
+    margin-bottom: 40px;
+    color: #e67e22; /* لون عنوان مميز */
+    font-size: 36px; /* حجم خط أكبر */
     font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* ظل للنص */
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
 }
 
 .calculator label,
 .calculator input,
 .calculator button {
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     width: 100%;
     box-sizing: border-box;
 }
 
+.calculator label {
+    font-size: 20px; /* حجم خط أكبر للتسميات */
+}
+
 .calculator input {
-    padding: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.2); /* حدود فاتحة */
-    border-radius: 12px;
-    font-size: 18px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    font-size: 22px; /* حجم خط أكبر للإدخال */
     transition: border-color 0.3s ease;
     text-align: right;
-    background-color: rgba(255, 255, 255, 0.05); /* خلفية شفافة فاتحة */
-    color: #e0e0e0;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #ecf0f1;
 }
 
 .calculator input:focus {
     outline: none;
-    border-color: #64b5f6; /* لون حدود عند التركيز */
-    box-shadow: 0 0 10px rgba(100, 181, 246, 0.7); /* ظل عند التركيز */
+    border-color: #3498db;
+    box-shadow: 0 0 12px rgba(52, 152, 219, 0.8);
 }
 
 .calculator button {
-    background: linear-gradient(135deg, #64b5f6, #42a5f5); /* تدرج أزرار */
+    background: linear-gradient(135deg, #3498db, #2980b9);
     color: white;
-    padding: 18px 25px;
+    padding: 22px 30px;
     border: none;
-    border-radius: 12px;
-    font-size: 18px;
+    border-radius: 15px;
+    font-size: 24px; /* حجم خط أكبر للأزرار */
     cursor: pointer;
     transition: background 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 5px 15px rgba(100, 181, 246, 0.5); /* ظل أزرار */
+    box-shadow: 0 6px 18px rgba(52, 152, 219, 0.6);
 }
 
 .calculator button:hover {
-    background: linear-gradient(135deg, #42a5f5, #64b5f6); /* تدرج عكسي عند التمرير */
+    background: linear-gradient(135deg, #2980b9, #3498db);
     transform: scale(1.05);
 }
