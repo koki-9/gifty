@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator">
+        <h1>Currency Calculator</h1>
+
+        <label for="usdPaid">USD Paid:</label>
+        <input type="number" id="usdPaid" inputmode="numeric" pattern="[0-9]*">
+
+        <label for="lbpPaid">LBP Paid:</label>
+        <input type="number" id="lbpPaid" inputmode="numeric" pattern="[0-9]*">
+
+        <label for="usdPurchase">USD Purchase:</label>
+        <input type="number" id="usdPurchase" inputmode="numeric" pattern="[0-9]*">
+
+        <label for="lbpPurchase">LBP Purchase:</label>
+        <input type="number" id="lbpPurchase" inputmode="numeric" pattern="[0-9]*">
+
+        <label for="exchangeRate">Exchange Rate (LBP/USD):</label>
+        <input type="number" id="exchangeRate" value="90000" inputmode="numeric" pattern="[0-9]*">
+
+        <button onclick="calculate()">Calculate</button>
+        <button onclick="resetCalculator()">Reset</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
