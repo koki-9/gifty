@@ -2,74 +2,78 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #4b6cb7, #182848); /* خلفية متدرجة حديثة */
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    color: #333;
+    color: #e0e0e0; /* لون نص فاتح */
 }
 
 .calculator {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.1); /* خلفية شفافة */
     padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    width: 380px;
+    border-radius: 20px; /* حواف مستديرة أكثر */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); /* ظل أعمق */
+    width: 400px; /* عرض أوسع */
     max-width: 95%;
     box-sizing: border-box;
     transition: transform 0.3s ease;
+    backdrop-filter: blur(10px); /* تأثير ضبابي للخلفية */
 }
 
 .calculator:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px); /* رفع عند التمرير */
 }
 
 .calculator h1 {
     text-align: center;
-    margin-bottom: 30px;
-    color: #4a5568;
-    font-weight: 600;
+    margin-bottom: 35px;
+    color: #a8dadc; /* لون عنوان مميز */
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* ظل للنص */
 }
 
 .calculator label,
 .calculator input,
 .calculator button {
     display: block;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     width: 100%;
     box-sizing: border-box;
 }
 
 .calculator input {
-    padding: 14px;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    font-size: 16px;
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* حدود فاتحة */
+    border-radius: 12px;
+    font-size: 18px;
     transition: border-color 0.3s ease;
     text-align: right;
-    background-color: #f7fafc;
+    background-color: rgba(255, 255, 255, 0.05); /* خلفية شفافة فاتحة */
+    color: #e0e0e0;
 }
 
 .calculator input:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 5px rgba(102, 126, 234, 0.5);
+    border-color: #64b5f6; /* لون حدود عند التركيز */
+    box-shadow: 0 0 10px rgba(100, 181, 246, 0.7); /* ظل عند التركيز */
 }
 
 .calculator button {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #64b5f6, #42a5f5); /* تدرج أزرار */
     color: white;
-    padding: 16px 20px;
+    padding: 18px 25px;
     border: none;
-    border-radius: 10px;
-    font-size: 16px;
+    border-radius: 12px;
+    font-size: 18px;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 5px 15px rgba(100, 181, 246, 0.5); /* ظل أزرار */
 }
 
 .calculator button:hover {
-    background: linear-gradient(135deg, #764ba2, #667eea);
+    background: linear-gradient(135deg, #42a5f5, #64b5f6); /* تدرج عكسي عند التمرير */
     transform: scale(1.05);
 }
